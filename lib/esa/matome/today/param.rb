@@ -3,7 +3,7 @@ module Esa
     module Today
       class Param
         def initialize(params: , today: Date.today)
-          query = "created:>=#{today}"
+          query = "updated:>=#{today} kind:stock"
           params ||= {}
           params[:q] ||= ''
           params[:q] = [*params[:q].split(' '), query].join(' ')

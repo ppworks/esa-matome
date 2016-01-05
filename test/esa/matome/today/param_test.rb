@@ -6,7 +6,7 @@ class Esa::Matome::Today::ParamTest < Minitest::Test
     today = Date.today
 
     assert_equal 100, params[:per_page]
-    assert_equal "created:>=#{today}", params[:q]
+    assert_equal "updated:>=#{today} kind:stock", params[:q]
   end
 
   def test_to_hash_with_query
@@ -14,6 +14,6 @@ class Esa::Matome::Today::ParamTest < Minitest::Test
     today = Date.today
 
     assert_equal 100, params[:per_page]
-    assert_equal "keyword created:>=#{today}", params[:q]
+    assert_equal "keyword updated:>=#{today} kind:stock", params[:q]
   end
 end
