@@ -1,0 +1,24 @@
+{
+  "name": "esa matome",
+  "keywords": [
+    "esa.io",
+    "esa"
+  ],
+  "env": {
+    "ESA_TOKEN": {
+      "description": "Your access token for esa.io"
+    },
+    "ESA_TEAM": {
+      "description": "Your team"
+    },
+    "ESA_TODAY_MATOME_TITLE": {
+      "value": "Today's Summary",
+      "required": false
+    },
+    "ESA_TODAY_MATOME_CATEGORY": {
+      "value": "esa/matome",
+      "required": false
+    }
+  },
+  "addons": ["scheduler:standard"]
+}

@@ -5,8 +5,8 @@ require 'esa/matome'
 class EsaClientToday
   ESA_TOKEN = ENV['ESA_TOKEN']
   ESA_TEAM  = ENV['ESA_TEAM']
-  ESA_TITLE = ENV.fetch('ESA_TITLE', '昨日の記事')
-  ESA_CATEGORY = ENV.fetch('ESA_CATEGORY', 'esa/matome')
+  ESA_TITLE = ENV.fetch('ESA_TODAY_MATOME_TITLE', '1日のまとめ')
+  ESA_CATEGORY = ENV.fetch('ESA_TODAY_MATOME_CATEGORY', 'esa/matome')
 
   include Esa::Matome::Retryable
 
