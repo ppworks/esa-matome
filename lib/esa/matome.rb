@@ -1,4 +1,6 @@
-require "esa/matome/version"
+require 'esa'
+require 'esa/matome/version'
+require 'esa/matome/today'
 
 module Esa
   module Matome
