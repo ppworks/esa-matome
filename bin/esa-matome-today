@@ -51,7 +51,7 @@ class EsaClientToday
       category: ESA_CATEGORY,
       body_md: @body,
       user: 'esa_bot',
-      wip: true
+      wip: false
     }
 
     wrap_response do
