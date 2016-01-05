@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require 'esa/matome'
+
+class EsaClientToday
+  ESA_TOKEN = ENV['ESA_TOKEN']
+  ESA_TEAM  = ENV['ESA_TEAM']
+  ESA_TITLE = ENV.fetch('ESA_TITLE', '昨日の記事')
+  ESA_CATEGORY = ENV.fetch('ESA_CATEGORY', 'esa/matome')
+
+  include Esa::Matome::Retryable
+
+  def self.run
+    self.new.run
+  end
+
+  def initialize
+    @client = Esa::Matome::Today::Client.new(access_token: ESA_TOKEN, current_team: ESA_TEAM)
+  end
+
+  def run
+    @body = String.new
+    all_posts.sort_by{ |post| post['full_name'] }.each do |post|
+      @body += "* [#{post['full_name']}](#{post['url']})\n"
+    end
+    create_post
+  end
+
+  private
+
+  def all_posts
+    collection = Esa::Matome::Collection.new
+
+    loop do
+      response_body = wrap_response {
+        @client.posts(page: collection.page,
+                      per_page: collection.per)
+      }
+      collection.data += response_body['posts']
+      break unless response_body['next_page']
+
+      collection.page = response_body['next_page']
+    end
+
+    collection.data
+  end
+
+  def create_post
+    params = {
+      name: "#{@client.today.gsub('-', '/')}/#{ESA_TITLE}",
+      category: ESA_CATEGORY,
+      body_md: @body,
+      user: 'esa_bot',
+      wip: true
+    }
+
+    wrap_response do
+      @client.esa_client.create_post(params)
+    end
+  end
+end
+
+EsaClientToday.run
