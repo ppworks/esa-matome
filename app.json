@@ -18,6 +18,11 @@
     "ESA_TODAY_MATOME_CATEGORY": {
       "value": "esa/matome",
       "required": false
+    },
+    "TZ": {
+      "description": "Set your timezone.",
+      "value": "UTC",
+      "required": false
     }
   },
   "addons": ["scheduler:standard"]
